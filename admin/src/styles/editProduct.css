@@ -1,0 +1,82 @@
+.edit-product-page {
+  padding: 30px;
+  max-width: 600px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Page Title */
+.edit-product-page h2 {
+  margin-bottom: 20px;
+  color: #1f2937;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Form */
+.edit-product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Inputs & textarea */
+.edit-product-form input,
+.edit-product-form textarea {
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+.edit-product-form input:focus,
+.edit-product-form textarea:focus {
+  border-color: #2563eb;
+}
+
+/* Textarea height */
+.edit-product-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Buttons wrapper */
+.edit-product-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* Update button */
+.update-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.update-btn:hover {
+  background: #1d4ed8;
+}
+
+/* Cancel button */
+.cancel-btn {
+  background: #e5e7eb;
+  color: #1f2937;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background: #d1d5db;
+}
