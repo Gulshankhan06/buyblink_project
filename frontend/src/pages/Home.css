@@ -1,0 +1,108 @@
+/* ===== HOME PAGE ===== */
+.home-page {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ===== COMMON SECTION SPACING ===== */
+.home-page > div {
+  margin-bottom: 100px; /* 🔥 sab merge problem yahin fix */
+}
+
+/* ===== SHOPPING ANIMATION SECTION ===== */
+.shopping-animation {
+  text-align: center;
+  padding: 80px 20px;
+  background: #f9fbff;
+}
+
+.shopping-animation h2 {
+  font-size: 32px;
+  margin-bottom: 50px;
+}
+
+.animation-slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px; /* 🔥 images ke beech proper gap */
+}
+
+.animation-slider img {
+  width: 220px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ===== ABOUT SECTION ===== */
+.about-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 50px 40px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.about-section h2 {
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+.about-section p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #555;
+}
+
+/* ===== CATEGORY SECTION ===== */
+.categories-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.category-card {
+  background: #2563eb;
+  color: white;
+  padding: 40px;
+  text-align: center;
+  border-radius: 14px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.4);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .animation-slider {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-section {
+    margin: 0 20px;
+  }
+}
