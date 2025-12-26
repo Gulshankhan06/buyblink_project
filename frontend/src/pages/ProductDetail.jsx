@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { addToCart } from "../utils/cart";
 import "../styles/productDetail.css";
+const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -9,14 +10,15 @@ export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/products/${id}`)
+    fetch(`${BASE_URL}/api/products/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
-        if (data.colors && data.colors.length > 0) {
+        if (data?.colors?.length > 0) {
           setSelectedColor(data.colors[0]);
         }
-      });
+      })
+      .catch((err) => console.error("Product detail error:", err));
   }, [id]);
 
   if (!product) return <h2 style={{ padding: "40px" }}>Loading...</h2>;
@@ -27,7 +29,6 @@ export default function ProductDetail() {
 
   return (
     <div className="product-detail-page">
-      
       {/* LEFT IMAGE */}
       <div className="image-section">
         <img src={product.image} alt={product.name} />
@@ -41,7 +42,7 @@ export default function ProductDetail() {
         <p className="description">{product.description}</p>
 
         {/* COLORS */}
-        {product.colors && (
+        {product.colors && product.colors.length > 0 && (
           <div className="colors">
             <p>Available Colors</p>
             <div className="color-list">

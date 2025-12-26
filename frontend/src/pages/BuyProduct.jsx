@@ -1,32 +1,35 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+const BASE_URL = process.env.REACT_APP_BACKEND_URL;
+const RAZORPAY_KEY = process.env.REACT_APP_RAZORPAY_KEY_ID;
+
 export default function BuyProduct() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 
-  // Fetch single product by ID
+  // 🔹 Fetch single product by ID
   useEffect(() => {
-    fetch(`http://localhost:5000/api/products/${id}`)
+    fetch(`${BASE_URL}/api/products/${id}`)
       .then((res) => res.json())
       .then((data) => setProduct(data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.error("Product fetch error:", err));
   }, [id]);
 
-  // ---------------------- Razorpay Online Payment -------------------------
+  // 🔹 Razorpay Online Payment
   const startRazorpay = async () => {
     if (!product) return;
 
-    const res = await fetch("http://localhost:5000/api/payment/order", {
+    const res = await fetch(`${BASE_URL}/api/payment/order`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ amount: product.price }),
     });
 
-    const order = await res.json();
+  const order = await res.json();
 
     const options = {
-      key: "RAZORPAY_KEY_ID", //
+      key: RAZORPAY_KEY,
       amount: order.amount,
       currency: "INR",
       name: "BuyBlink Store",
@@ -34,7 +37,8 @@ export default function BuyProduct() {
       order_id: order.id,
       handler: function (response) {
         alert(
-          "Payment Successful! Payment ID: " + response.razorpay_payment_id
+          "Payment Successful! Payment ID: " +
+            response.razorpay_payment_id
         );
       },
       prefill: {
@@ -49,19 +53,19 @@ export default function BuyProduct() {
     rzp.open();
   };
 
-  // ------------- PhonePe / Paytm / Google Pay UPI Intent Payment -----------
+  // 🔹 UPI Intent Payment
   const handleUPI = () => {
     if (!product) return;
 
-    const upiID = "yourupiid@bank"; //
+    const upiID = "yourupiid@bank"; // demo
     const amount = product.price;
     const name = product.name;
 
     const upiLink = `upi://pay?pa=${upiID}&pn=${name}&am=${amount}&cu=INR`;
-    window.location.href = upiLink; // PhonePe / Paytm / Google Pay open ho jayega
+    window.location.href = upiLink;
   };
 
-  // ----------------------------- COD --------------------------------------
+  // 🔹 COD
   const handleCOD = () => {
     alert("Order placed successfully (Cash on Delivery)");
   };
@@ -81,41 +85,30 @@ export default function BuyProduct() {
 
       <h2>{product.name}</h2>
       <h3 style={{ color: "green" }}>₹{product.price}</h3>
+
       <p style={{ maxWidth: "500px", margin: "10px auto" }}>
-        {product.discription}
+        {product.description}
       </p>
 
       <br />
 
       <button
         onClick={startRazorpay}
-        style={{
-          padding: "10px 20px",
-          margin: "10px",
-          cursor: "pointer",
-        }}
+        style={{ padding: "10px 20px", margin: "10px", cursor: "pointer" }}
       >
         Pay Online (Razorpay)
       </button>
 
       <button
         onClick={handleUPI}
-        style={{
-          padding: "10px 20px",
-          margin: "10px",
-          cursor: "pointer",
-        }}
+        style={{ padding: "10px 20px", margin: "10px", cursor: "pointer" }}
       >
         Pay Using PhonePe / Paytm / Google Pay
       </button>
 
       <button
         onClick={handleCOD}
-        style={{
-          padding: "10px 20px",
-          margin: "10px",
-          cursor: "pointer",
-        }}
+        style={{ padding: "10px 20px", margin: "10px", cursor: "pointer" }}
       >
         Cash on Delivery
       </button>

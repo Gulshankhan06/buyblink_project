@@ -4,6 +4,8 @@ import ProductCard from "../components/ProductCard";
 import CategoryBar from "../components/CategoryBar";
 import "../styles/product.css";
 
+const BASE_URL = process.env.REACT_APP_BACKEND_URL;
+
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState("all");
@@ -23,15 +25,18 @@ export default function Products() {
     }
   }, [location.search]);
 
-  /* 🔹 Products fetch */
+  /* 🔹 Products fetch (BACKEND se) */
   useEffect(() => {
-    fetch("http://localhost:5000/api/products")
+    fetch(`${BASE_URL}/api/products`)
       .then((res) => res.json())
       .then((data) => setProducts(data))
-      .catch(() => setProducts([]));
+      .catch((err) => {
+        console.error("Error fetching products:", err);
+        setProducts([]);
+      });
   }, []);
 
-  /* 🔹 Category click  URL update */
+  /* 🔹 Category click → URL update */
   const handleCategoryChange = (cat) => {
     setCategory(cat);
     if (cat === "all") {
@@ -41,7 +46,7 @@ export default function Products() {
     }
   };
 
-  /* 🔹 Filter logic (STRICT & SAFE) */
+  /* 🔹 Filter logic */
   const filteredProducts =
     category === "all"
       ? products
