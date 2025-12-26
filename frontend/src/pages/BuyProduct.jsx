@@ -57,4 +57,61 @@ export default function BuyProduct() {
   const handleUPI = () => {
     if (!product) return;
 
-    const
+    const upiID = "yourupiid@bank"; // demo
+    const amount = product.price;
+    const name = product.name;
+
+    const upiLink = `upi://pay?pa=${upiID}&pn=${name}&am=${amount}&cu=INR`;
+    window.location.href = upiLink;
+  };
+
+  // 🔹 COD
+  const handleCOD = () => {
+    alert("Order placed successfully (Cash on Delivery)");
+  };
+
+  if (!product) return <h2 style={{ padding: 20 }}>Loading Product...</h2>;
+
+  return (
+    <div style={{ padding: "40px", textAlign: "center" }}>
+      <h1>Buy Product</h1>
+
+      <img
+        src={product.image}
+        alt={product.name}
+        width="300"
+        style={{ borderRadius: "10px", marginBottom: "20px" }}
+      />
+
+      <h2>{product.name}</h2>
+      <h3 style={{ color: "green" }}>₹{product.price}</h3>
+
+      <p style={{ maxWidth: "500px", margin: "10px auto" }}>
+        {product.description}
+      </p>
+
+      <br />
+
+      <button
+        onClick={startRazorpay}
+        style={{ padding: "10px 20px", margin: "10px", cursor: "pointer" }}
+      >
+        Pay Online (Razorpay)
+      </button>
+
+      <button
+        onClick={handleUPI}
+        style={{ padding: "10px 20px", margin: "10px", cursor: "pointer" }}
+      >
+        Pay Using PhonePe / Paytm / Google Pay
+      </button>
+
+      <button
+        onClick={handleCOD}
+        style={{ padding: "10px 20px", margin: "10px", cursor: "pointer" }}
+      >
+        Cash on Delivery
+      </button>
+    </div>
+  );
+}
