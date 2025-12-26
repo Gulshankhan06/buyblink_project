@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import CategoryBar from "../components/CategoryBar";
 import "../styles/product.css";
+
 const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
 export default function Products() {
