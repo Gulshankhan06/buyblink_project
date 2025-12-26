@@ -26,7 +26,7 @@ export default function BuyProduct() {
       body: JSON.stringify({ amount: product.price }),
     });
 
-    const order = await res.json();
+  const order = await res.json();
 
     const options = {
       key: RAZORPAY_KEY,
