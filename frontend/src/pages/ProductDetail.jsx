@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { addToCart } from "../utils/cart";
 import "../styles/productDetail.css";
-
 const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
 export default function ProductDetail() {
