@@ -1,17 +1,20 @@
 .edit-product-page {
   padding: 30px;
   max-width: 600px;
+  margin: 30px auto;
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  width: 100%;
 }
 
 /* Page Title */
 .edit-product-page h2 {
   margin-bottom: 20px;
   color: #1f2937;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
+  text-align: center;
 }
 
 /* Form */
@@ -24,17 +27,19 @@
 /* Inputs & textarea */
 .edit-product-form input,
 .edit-product-form textarea {
-  padding: 10px 12px;
+  padding: 12px;
   font-size: 14px;
   border-radius: 8px;
   border: 1px solid #d1d5db;
   outline: none;
-  transition: border 0.2s ease;
+  width: 100%;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
 .edit-product-form input:focus,
 .edit-product-form textarea:focus {
   border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
 }
 
 /* Textarea height */
@@ -47,19 +52,24 @@
 .edit-product-actions {
   display: flex;
   gap: 12px;
-  margin-top: 10px;
+  margin-top: 14px;
+}
+
+/* Buttons */
+.update-btn,
+.cancel-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
 }
 
 /* Update button */
 .update-btn {
   background: #2563eb;
   color: white;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background 0.2s ease;
 }
 
 .update-btn:hover {
@@ -70,13 +80,20 @@
 .cancel-btn {
   background: #e5e7eb;
   color: #1f2937;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-size: 14px;
-  cursor: pointer;
 }
 
 .cancel-btn:hover {
   background: #d1d5db;
+}
+
+/* 🔥 MOBILE FIX */
+@media (max-width: 480px) {
+  .edit-product-page {
+    padding: 20px;
+    margin: 16px;
+  }
+
+  .edit-product-actions {
+    flex-direction: column;
+  }
 }

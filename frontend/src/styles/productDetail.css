@@ -1,35 +1,46 @@
 .product-detail-page {
   display: flex;
-  gap: 50px;
-  padding: 40px;
+  gap: 40px;
+  padding: 24px;
+  max-width: 1200px;
+  margin: auto;
 }
 
+/* IMAGE SECTION */
 .image-section img {
-  width: 420px;
+  width: 100%;
+  max-width: 420px;
   border-radius: 10px;
 }
 
+/* INFO SECTION */
 .info-section {
-  max-width: 500px;
+  max-width: 520px;
 }
 
 .price {
   color: #e53935;
   margin: 10px 0;
+  font-size: 22px;
+  font-weight: 600;
 }
 
 .description {
   margin: 15px 0;
   color: #444;
+  line-height: 1.5;
 }
 
+/* COLORS */
 .colors p {
   margin-bottom: 6px;
+  font-weight: 500;
 }
 
 .color-list {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .color-circle {
@@ -44,28 +55,60 @@
   outline: 2px solid #000;
 }
 
+/* DELIVERY & STOCK */
 .delivery,
 .stock {
   margin-top: 12px;
+  font-size: 14px;
 }
 
+/* BUTTONS */
 .buttons {
   margin-top: 25px;
   display: flex;
   gap: 15px;
+  flex-wrap: wrap;
+}
+
+.cart-btn,
+.buy-btn {
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  border-radius: 6px;
 }
 
 .cart-btn {
-  padding: 12px 20px;
   background: #ff9f00;
-  border: none;
-  cursor: pointer;
 }
 
 .buy-btn {
-  padding: 12px 20px;
   background: #fb641b;
   color: white;
-  border: none;
-  cursor: pointer;
+}
+
+/* 🔥 MOBILE FIX */
+@media (max-width: 768px) {
+  .product-detail-page {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .image-section img {
+    max-width: 100%;
+  }
+
+  .info-section {
+    max-width: 100%;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .cart-btn,
+  .buy-btn {
+    width: 100%;
+  }
 }

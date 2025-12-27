@@ -1,57 +1,87 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.navbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:16px 40px;
-  background:#ffffff;
-  box-shadow:0 2px 10px rgba(0,0,0,0.08);
+/* NAVBAR */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
 
-.logo{
-  font-size:22px;
-  font-weight:700;
-  color:#2563eb;
+/* LOGO */
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #2563eb;
 }
 
-.navbar ul{
-  display:flex;
-  align-items:center;
-  list-style:none;   
-  gap:22px;
+/* LINKS */
+.nav-links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 22px;
 }
 
-.navbar ul li{
-  list-style:none;   
+.nav-links li a {
+  text-decoration: none;
+  color: #111827;
+  font-weight: 500;
 }
 
-.navbar ul li a{
-  text-decoration:none;
-  color:#111827;
-  font-weight:500;
+/* BUTTONS */
+.login-btn {
+  padding: 7px 16px;
+  background: #2563eb;
+  color: white !important;
+  border-radius: 6px;
 }
 
-.navbar ul li a:hover{
-  color:#2563eb;
+.logout-btn {
+  padding: 7px 16px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-.login-btn{
-  padding:7px 16px;
-  background:#2563eb;
-  color:white !important;
-  border-radius:6px;
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
 }
 
-.logout-btn{
-  padding:7px 16px;
-  background:#ef4444;
-  color:white;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
+/* 🔥 MOBILE */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: white;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 0;
+    display: none;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
 }

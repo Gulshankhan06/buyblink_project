@@ -8,6 +8,7 @@ const ProductsList = () => {
 
   const navigate = useNavigate();
   const BASE_URL = "https://buyblink-back-end.onrender.com";
+
   // FETCH PRODUCTS
   const fetchProducts = async () => {
     try {
@@ -28,7 +29,7 @@ const ProductsList = () => {
 
   // DELETE PRODUCT
   const deleteProduct = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this product?")) return;
+    if (!window.confirm("Delete this product?")) return;
 
     try {
       await fetch(`${BASE_URL}/api/products/${id}`, {
@@ -40,7 +41,7 @@ const ProductsList = () => {
     }
   };
 
-  if (loading) return <h3 style={{ padding: "20px" }}>Loading products...</h3>;
+  if (loading) return <h3 style={{ padding: "20px" }}>Loading...</h3>;
 
   const totalProducts = products.length;
   const activeProducts = products.filter(p => p.status === "active").length;
@@ -48,7 +49,7 @@ const ProductsList = () => {
 
   return (
     <div className="products-page">
-      {/* SUMMARY CARDS */}
+      {/* SUMMARY */}
       <div className="summary-cards">
         <div className="card">
           <h2>{totalProducts}</h2>
@@ -73,12 +74,12 @@ const ProductsList = () => {
           <thead>
             <tr>
               <th>Image</th>
-              <th>Name</th>
+              <th>Title</th>
               <th>Description</th>
               <th>Price</th>
               <th>Discount</th>
               <th>Category</th>
-              <th>Stock</th>
+              <th>Qty</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -90,12 +91,8 @@ const ProductsList = () => {
                 <td>
                   {product.image ? (
                     <img
-                      src={
-                        product.image.startsWith("http")
-                          ? product.image
-                          : `${BASE_URL}${product.image}`
-                      }
-                      alt={product.name}
+                      src={product.image}
+                      alt={product.title}
                       className="product-img"
                     />
                   ) : (
@@ -103,21 +100,19 @@ const ProductsList = () => {
                   )}
                 </td>
 
-                <td>{product.name}</td>
+                {/* ✅ FIXED */}
+                <td>{product.title}</td>
 
-                {/* ✅ DESCRIPTION COLUMN */}
                 <td className="desc-cell">
                   {product.description
-                    ? product.description.length > 60
-                      ? product.description.substring(0, 60) + "..."
-                      : product.description
+                    ? product.description.slice(0, 60)
                     : "-"}
                 </td>
 
                 <td>₹{product.price}</td>
-                <td>{product.discountPrice ? `₹${product.discountPrice}` : "-"}</td>
+                <td>{product.discount || "-"}</td>
                 <td>{product.category}</td>
-                <td>{product.stock}</td>
+                <td>{product.quantity}</td>
 
                 <td>
                   <span
@@ -134,7 +129,9 @@ const ProductsList = () => {
                 <td>
                   <button
                     className="edit-btn"
-                    onClick={() => navigate(`/edit-product/${product._id}`)}
+                    onClick={() =>
+                      navigate(`/edit-product/${product._id}`)
+                    }
                   >
                     Edit
                   </button>

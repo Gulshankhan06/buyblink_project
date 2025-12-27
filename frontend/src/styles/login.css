@@ -6,17 +6,18 @@
 
 /* LOGIN PAGE CONTAINER */
 .login-container{
-  min-height: 90vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background: #f3f4f6;
-  padding: 20px;
+  padding: 16px;
 }
 
 /* LOGIN CARD */
 .login-box{
   width: 360px;
+  max-width: 100%;
   background: #ffffff;
   padding: 30px;
   border-radius: 14px;
@@ -77,10 +78,14 @@
   background: #1e40af;
 }
 
-/* MOBILE RESPONSIVE */
+/* 🔥 MOBILE SAFE */
 @media (max-width: 480px){
   .login-box{
     width: 100%;
-    padding: 24px;
+    padding: 22px;
+  }
+
+  .login-box h2{
+    font-size: 20px;
   }
 }

@@ -1,5 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
+/* ===== PAGE CONTAINER ===== */
 .add-product-page {
   max-width: 700px;
+  width: 100%;
   margin: 40px auto;
   background: #ffffff;
   padding: 28px 32px;
@@ -8,20 +14,22 @@
   font-family: "Segoe UI", sans-serif;
 }
 
+/* ===== HEADING ===== */
 .add-product-page h2 {
   text-align: center;
   margin-bottom: 24px;
   color: #222;
+  font-size: 24px;
 }
 
-/* FORM */
+/* ===== FORM ===== */
 .product-form {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* GROUP */
+/* ===== GROUP ===== */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -34,11 +42,12 @@
   color: #444;
 }
 
-/* INPUTS */
+/* ===== INPUTS ===== */
 .product-form input,
 .product-form textarea,
 .product-form select {
-  padding: 10px 12px;
+  width: 100%;
+  padding: 11px 12px;
   border-radius: 8px;
   border: 1px solid #dcdcdc;
   font-size: 14px;
@@ -51,7 +60,7 @@
   min-height: 90px;
 }
 
-/* FOCUS */
+/* ===== FOCUS ===== */
 .product-form input:focus,
 .product-form textarea:focus,
 .product-form select:focus {
@@ -59,7 +68,7 @@
   box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
 }
 
-/* ROW */
+/* ===== ROW ===== */
 .form-row {
   display: flex;
   gap: 16px;
@@ -69,10 +78,10 @@
   flex: 1;
 }
 
-/* BUTTON */
+/* ===== BUTTON ===== */
 .btn-submit {
-  margin-top: 10px;
-  padding: 12px;
+  margin-top: 12px;
+  padding: 13px;
   border-radius: 10px;
   border: none;
   background: linear-gradient(135deg, #4f46e5, #6366f1);
@@ -88,14 +97,36 @@
   box-shadow: 0 6px 18px rgba(79, 70, 229, 0.35);
 }
 
-/* MOBILE */
+/* ===== 🔥 MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .add-product-page {
+    margin: 24px 16px;
+    padding: 24px 20px;
+  }
+
+  .add-product-page h2 {
+    font-size: 22px;
+  }
+}
+
 @media (max-width: 600px) {
   .form-row {
     flex-direction: column;
   }
 
+  .btn-submit {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
   .add-product-page {
-    margin: 20px;
-    padding: 22px;
+    margin: 16px 12px;
+    padding: 20px 16px;
+  }
+
+  .add-product-page h2 {
+    font-size: 20px;
   }
 }

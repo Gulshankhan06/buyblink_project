@@ -1,29 +1,43 @@
 .product-page {
-  padding: 20px;
+  padding: 16px;
 }
+
+/* CATEGORY BAR */
 .category-bar {
   margin-bottom: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
+
 .category-bar button {
   padding: 8px 12px;
-  margin-right: 8px;
   border-radius: 6px;
   border: 1px solid #d0d7ff;
   background: white;
   cursor: pointer;
+  font-size: 14px;
 }
+
+/* 🔥 PRODUCT GRID – MOBILE FIRST */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 18px;
 }
+
+/* PRODUCT CARD */
 .product-card {
   background: white;
   padding: 12px;
   border-radius: 8px;
   text-align: center;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  max-width: 100%;
 }
+
+/* IMAGE */
 .product-card img {
   width: 100%;
   height: 180px;
@@ -32,6 +46,7 @@
   border-radius: 6px;
 }
 
+/* BUTTON */
 .product-card button {
   margin-top: 10px;
   width: 100%;
@@ -41,4 +56,16 @@
   color: white;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 14px;
+}
+
+/* 🔥 EXTRA MOBILE SAFETY */
+@media (max-width: 480px) {
+  .product-page {
+    padding: 12px;
+  }
+
+  .product-card img {
+    height: 200px;
+  }
 }

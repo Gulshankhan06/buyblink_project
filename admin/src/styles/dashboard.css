@@ -1,46 +1,79 @@
+/* ===== DASHBOARD WRAPPER ===== */
 .dashboard-wrapper {
   padding: 20px;
   background: #f8fafc;
+  width: 100%;
+  overflow-x: auto;          /* horizontal scroll */
+  overflow-y: hidden;
 }
 
-/* ===== STAT CARDS ===== */
+/* ===== STAT CARDS (HORIZONTAL) ===== */
 .stats-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   gap: 20px;
   margin-bottom: 30px;
+  flex-wrap: nowrap;
 }
 
 .card {
-  background: white;
+  min-width: 220px;
+  background: #ffffff;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   text-align: center;
+  flex-shrink: 0;
 }
 
 .card h3 {
-  font-size: 16px;
+  font-size: 15px;
   color: #475569;
   margin-bottom: 10px;
 }
 
 .card p {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: bold;
   color: #2563eb;
 }
 
-/* ===== CHARTS ===== */
+/* ===== CHARTS SECTION (HORIZONTAL) ===== */
 .charts-section {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
+  display: flex;
   gap: 20px;
+  flex-wrap: nowrap;
 }
 
 .chart-card {
-  background: white;
+  min-width: 320px;
+  background: #ffffff;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+}
+
+/* ===== OPTIONAL: SMOOTH SCROLL ===== */
+.dashboard-wrapper {
+  scroll-behavior: smooth;
+}
+
+/* ===== MOBILE OPTIMIZATION ===== */
+@media (max-width: 480px) {
+  .dashboard-wrapper {
+    padding: 14px;
+  }
+
+  .card {
+    min-width: 200px;
+  }
+
+  .card p {
+    font-size: 22px;
+  }
+
+  .chart-card {
+    min-width: 280px;
+    padding: 16px;
+  }
 }

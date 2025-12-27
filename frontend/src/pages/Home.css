@@ -6,30 +6,32 @@
 
 /* ===== COMMON SECTION SPACING ===== */
 .home-page > div {
-  margin-bottom: 100px; /* 🔥 sab merge problem yahin fix */
+  margin-bottom: 80px;
 }
 
 /* ===== SHOPPING ANIMATION SECTION ===== */
 .shopping-animation {
   text-align: center;
-  padding: 80px 20px;
+  padding: 60px 16px;
   background: #f9fbff;
 }
 
 .shopping-animation h2 {
   font-size: 32px;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .animation-slider {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 80px; /* 🔥 images ke beech proper gap */
+  gap: 60px;
+  flex-wrap: wrap;
 }
 
 .animation-slider img {
   width: 220px;
+  max-width: 100%;
   height: auto;
   object-fit: contain;
 }
@@ -38,7 +40,7 @@
 .about-section {
   max-width: 900px;
   margin: 0 auto;
-  padding: 50px 40px;
+  padding: 40px 30px;
   background: white;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
@@ -60,7 +62,7 @@
 .categories-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 16px;
 }
 
 .section-title {
@@ -78,7 +80,7 @@
 .category-card {
   background: #2563eb;
   color: white;
-  padding: 40px;
+  padding: 36px 20px;
   text-align: center;
   border-radius: 14px;
   font-size: 20px;
@@ -91,18 +93,62 @@
   box-shadow: 0 12px 30px rgba(37, 99, 235, 0.4);
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===== 🔥 MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
+
+  .home-page > div {
+    margin-bottom: 60px;
+  }
+
+  .shopping-animation h2 {
+    font-size: 26px;
+  }
+
   .animation-slider {
     flex-direction: column;
-    gap: 40px;
+    gap: 30px;
+  }
+
+  .animation-slider img {
+    width: 180px;
+  }
+
+  .about-section {
+    margin: 0 16px;
+    padding: 30px 20px;
+  }
+
+  .about-section h2 {
+    font-size: 24px;
+  }
+
+  .about-section p {
+    font-size: 15px;
+  }
+
+  .section-title {
+    font-size: 26px;
+    margin-bottom: 30px;
   }
 
   .categories-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 
-  .about-section {
-    margin: 0 20px;
+  .category-card {
+    font-size: 18px;
+    padding: 28px 16px;
+  }
+}
+
+/* ===== EXTRA SMALL DEVICES ===== */
+@media (max-width: 480px) {
+  .shopping-animation {
+    padding: 50px 14px;
+  }
+
+  .animation-slider img {
+    width: 160px;
   }
 }

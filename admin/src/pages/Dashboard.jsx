@@ -44,7 +44,7 @@ function Dashboard() {
     datasets: [
       {
         label: "Count",
-        data: [12, 5],
+        data: [25, 5],
         backgroundColor: "#60a5fa",
       },
     ],
@@ -56,7 +56,7 @@ function Dashboard() {
       <div className="stats-cards">
         <div className="card">
           <h3>Total Products</h3>
-          <p>12</p>
+          <p>25</p>
         </div>
 
         <div className="card">
