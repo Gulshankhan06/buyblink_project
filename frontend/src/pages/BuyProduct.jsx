@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import API_URL from "../utils/baseUrl";
 
-const BASE_URL = process.env.REACT_APP_BACKEND_URL;
+
 const RAZORPAY_KEY = process.env.REACT_APP_RAZORPAY_KEY_ID;
 
 export default function BuyProduct() {
@@ -10,8 +11,9 @@ export default function BuyProduct() {
 
   // 🔹 Fetch single product by ID
   useEffect(() => {
-    fetch(`${BASE_URL}/api/products/${id}`)
-      .then((res) => res.json())
+fetch(`${API_URL}/api/products/${id}`)
+
+    .then((res) => res.json())
       .then((data) => setProduct(data))
       .catch((err) => console.error("Product fetch error:", err));
   }, [id]);

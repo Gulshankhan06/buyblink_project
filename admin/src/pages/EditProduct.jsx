@@ -17,7 +17,7 @@ export default function EditProduct() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/products/${id}`)
+    fetch(`https://buyblink-back-end.onrender.com/api/products/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setForm({
@@ -38,7 +38,7 @@ export default function EditProduct() {
   const handleUpdate = async (e) => {
     e.preventDefault();
 
-    const res = await fetch(`http://localhost:5000/api/products/${id}`, {
+    const res = await fetch(`https://buyblink-back-end.onrender.com/api/products/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form)

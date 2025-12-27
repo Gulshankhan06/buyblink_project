@@ -3,8 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import CategoryBar from "../components/CategoryBar";
 import "../styles/product.css";
-
-const BASE_URL = process.env.REACT_APP_BACKEND_URL;
+import API_URL from "../utils/baseUrl";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -13,7 +12,7 @@ export default function Products() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  /* 🔹 URL se category read karna */
+  // 🔹 URL se category read
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const cat = params.get("category");
@@ -25,18 +24,21 @@ export default function Products() {
     }
   }, [location.search]);
 
-  /* 🔹 Products fetch (BACKEND se) */
-  useEffect(() => {
-    fetch(`${BASE_URL}/api/products`)
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => {
-        console.error("Error fetching products:", err);
-        setProducts([]);
-      });
-  }, []);
+  // 🔹 Products fetch
+ useEffect(() => {
+  fetch(`${API_URL}/api/products`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("PRODUCTS FROM API 👉", data);
+      setProducts(data);
+    })
+    .catch((err) => {
+      console.error("Error fetching products:", err);
+      setProducts([]);
+    });
+}, []);
 
-  /* 🔹 Category click → URL update */
+  // 🔹 Category click
   const handleCategoryChange = (cat) => {
     setCategory(cat);
     if (cat === "all") {
@@ -46,12 +48,12 @@ export default function Products() {
     }
   };
 
-  /* 🔹 Filter logic */
+  // 🔹 Filter products
   const filteredProducts =
     category === "all"
       ? products
       : products.filter(
-          (p) => p.category && p.category.toLowerCase() === category
+          (p) => p.category?.toLowerCase() === category
         );
 
   return (

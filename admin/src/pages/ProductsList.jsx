@@ -7,8 +7,7 @@ const ProductsList = () => {
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
-  const BASE_URL = "http://localhost:5000";
-
+  const BASE_URL = "https://buyblink-back-end.onrender.com";
   // FETCH PRODUCTS
   const fetchProducts = async () => {
     try {
