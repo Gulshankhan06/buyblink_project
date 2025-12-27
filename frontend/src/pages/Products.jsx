@@ -12,48 +12,61 @@ export default function Products() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // 🔹 URL se category read
+  // 🔹 Read category from URL
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const cat = params.get("category");
 
     if (cat) {
-      setCategory(cat.toLowerCase());
+      setCategory(cat.toLowerCase().trim());
     } else {
       setCategory("all");
     }
   }, [location.search]);
 
-  // 🔹 Products fetch
- useEffect(() => {
-  fetch(`${API_URL}/api/products`)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log("PRODUCTS FROM API 👉", data);
-      setProducts(data);
-    })
-    .catch((err) => {
-      console.error("Error fetching products:", err);
-      setProducts([]);
-    });
-}, []);
+  // 🔹 Fetch products
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch(`${API_URL}/api/products`);
+        const data = await res.json();
 
-  // 🔹 Category click
+        console.log("PRODUCTS FROM API 👉", data);
+
+        if (Array.isArray(data)) {
+          setProducts(data);
+        } else {
+          setProducts([]);
+        }
+      } catch (err) {
+        console.error("Error fetching products:", err);
+        setProducts([]);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  // 🔹 Category click handler
   const handleCategoryChange = (cat) => {
-    setCategory(cat);
-    if (cat === "all") {
+    const selected = cat.toLowerCase().trim();
+    setCategory(selected);
+
+    if (selected === "all") {
       navigate("/products");
     } else {
-      navigate(`/products?category=${cat}`);
+      navigate(`/products?category=${selected}`);
     }
   };
 
-  // 🔹 Filter products
+  // 🔹 Filter products (SAFE & CASE-INSENSITIVE)
   const filteredProducts =
     category === "all"
       ? products
       : products.filter(
-          (p) => p.category?.toLowerCase() === category
+          (p) =>
+            p.category &&
+            p.category.toString().toLowerCase().trim() === category
         );
 
   return (
