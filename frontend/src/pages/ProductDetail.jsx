@@ -1,90 +1,116 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import BASE_URL from "../utils/baseUrl";
 import { addToCart } from "../utils/cart";
 import "../styles/productDetail.css";
-import API_URL from "../utils/baseUrl";
 
-export default function ProductDetail() {
+const ProductDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const [product, setProduct] = useState(null);
-  const [selectedColor, setSelectedColor] = useState("");
+  const [activeImage, setActiveImage] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-     fetch(`${API_URL}/api/products/${id}`)
+    const fetchProduct = async () => {
+      try {
+        const res = await fetch(`${BASE_URL}/api/products/${id}`);
+        const data = await res.json();
+        const p = data.product || data;
 
-      .then((res) => res.json())
-      .then((data) => {
-        setProduct(data);
-        if (data?.colors?.length > 0) {
-          setSelectedColor(data.colors[0]);
-        }
-      })
-      .catch((err) => console.error("Product detail error:", err));
+        setProduct(p);
+        setActiveImage(p.image || p.images?.[0]);
+      } catch (err) {
+        console.error("Product fetch error ❌", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
   }, [id]);
 
-  if (!product) return <h2 style={{ padding: "40px" }}>Loading...</h2>;
+  if (loading) return <p className="pd-status">Loading...</p>;
+  if (!product) return <p className="pd-status">Product not found</p>;
 
-  const buyNow = () => {
-    alert(`Buying: ${product.name}`);
+  // 🛒 ADD TO CART
+  const handleAddToCart = () => {
+    addToCart(product);
+    alert("Product added to cart 🛒");
+  };
+
+  // ⚡ BUY NOW
+  const handleBuyNow = () => {
+    addToCart(product);
+    navigate("/cart");
   };
 
   return (
-    <div className="product-detail-page">
-      {/* LEFT IMAGE */}
-      <div className="image-section">
-        <img src={product.image} alt={product.name} />
+    <div className="pd-container">
+      {/* IMAGE SECTION */}
+      <div className="pd-image-section">
+        <img
+          src={activeImage}
+          className="pd-main-img"
+          alt={product.title}
+        />
+{/* THUMBNAILS (show only if multiple images) */}
+{product.images && product.images.length > 1 && (
+  <div className="pd-thumbs">
+    {product.images.map((img, i) => (
+      <img
+        key={i}
+        src={img}
+        className={`pd-thumb ${activeImage === img ? "active" : ""}`}
+        onClick={() => setActiveImage(img)}
+        alt=""
+      />
+    ))}
+  </div>
+)}
+
+        
       </div>
 
-      {/* RIGHT INFO */}
-      <div className="info-section">
-        <h1>{product.name}</h1>
-        <h2 className="price">₹{product.price}</h2>
+      {/* INFO SECTION */}
+      <div className="pd-info-section">
+        <h2>{product.name}</h2>
 
-        <p className="description">{product.description}</p>
+        <p className="pd-price">₹{product.price}</p>
 
-        {/* COLORS */}
-        {product.colors && product.colors.length > 0 && (
-          <div className="colors">
-            <p>Available Colors</p>
-            <div className="color-list">
-              {product.colors.map((color, i) => (
-                <span
-                  key={i}
-                  className={`color-circle ${
-                    selectedColor === color ? "active" : ""
-                  }`}
-                  style={{ backgroundColor: color }}
-                  onClick={() => setSelectedColor(color)}
-                />
-              ))}
-            </div>
-          </div>
-        )}
+        <p className="pd-desc">{product.description}</p>
 
-        {/* DELIVERY */}
-        <p className="delivery">
-          🚚 Delivery by <b>{product.deliveryDate || "5-7 Working Days"}</b>
-        </p>
-
-        {/* STOCK */}
-        <p className="stock">
-          {product.stock > 0 ? "✅ In Stock" : "❌ Out of Stock"}
-        </p>
+        <div className="pd-meta">
+          <p>
+            <b>Status:</b>{" "}
+            <span
+              className={`pd-status ${
+                product.status === "active" ? "active" : "inactive"
+              }`}
+            >
+              {product.status}
+            </span>
+          </p>
+          <p><b>Stock:</b> {product.stock}</p>
+          <p className="pd-delivery">
+            🚚 Free delivery in 5–7 days
+          </p>
+        </div>
 
         {/* ACTION BUTTONS */}
-        <div className="buttons">
-          <button
-            className="cart-btn"
-            onClick={() => addToCart({ ...product, selectedColor })}
-          >
+        <div className="pd-actions">
+          <button className="cart-btn" onClick={handleAddToCart}>
             Add to Cart
           </button>
 
-          <button className="buy-btn" onClick={buyNow}>
+          <button className="buy-btn" onClick={handleBuyNow}>
             Buy Now
           </button>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default ProductDetails;
