@@ -24,7 +24,7 @@ const Products = () => {
           data.products || data.data || data || []
         );
       } catch (err) {
-        setError("Products load nahi ho pa rahe");
+        setError("Products is not loading");
       } finally {
         setLoading(false);
       }
